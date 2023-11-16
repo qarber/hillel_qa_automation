@@ -1,6 +1,3 @@
-import { Dev } from "./dev.js";
-import { PM } from "./pm.js";
-
 export class Employee {
     constructor (id, salary) {
         this.id = id;
@@ -8,11 +5,14 @@ export class Employee {
     }
     
     static compareSalary (firstEmpl, SecondEmpl) {
-      if (firstEmpl.salary > SecondEmpl.salary) {
-        return `User with id ${firstEmpl.id} has greater salary`
+      if (firstEmpl.salary === SecondEmpl.salary) {
+        return "salaries are equal";
       }
-        else if (firstEmpl.salary === SecondEmpl.salary){
-        return "salaries are equal"
+      else if (firstEmpl.salary > SecondEmpl.salary) {
+        return `User with id ${firstEmpl.id} has greater salary`;
+      }
+      else {
+        return `User with id ${SecondEmpl.id} has greater salary`;
       }
     }
   }
