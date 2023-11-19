@@ -6,7 +6,7 @@
 const str = "Це довільний текст для створення масиву слів ";
 function stringToArray(str) {
     // Ваш код
-newArray = str.trim()
+const newArray = str.trim()
 .toLowerCase()
 .split(" ")
 .sort((a,b) => a.localeCompare(b)); // Для багатьох алфавітів краще використовувати метод str.localeCompare для правильного сортування літер
@@ -43,7 +43,7 @@ const initialArray2 = [2, 3, 6, 7, 9, 12];
 function arrayOfEvens(arr) {
     // Ваш код
     let finalArray = [];
-    for (i = 0; i < arr.length; i++) {
+    for (let i = 0; i < arr.length; i++) {
         let result = arr[i] % 2; 
         if (result === 0) {
            finalArray.push(arr[i]);
@@ -63,7 +63,7 @@ function createArray(element) {
     // Ваш код
     let newArray = [element];
      
-     for (i = 0; i < newArray.length; i++) {
+     for (let i = 0; i < newArray.length; i++) {
         if (newArray[i] < 30) {
             let result = newArray[i] + element;
             newArray.push(result);
