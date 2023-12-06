@@ -12,57 +12,56 @@ const baseUrl = "https://jsonplaceholder.typicode.com/posts/";
 // /* 2. Реалізувати функцію getPostsByUsedId, яка буде знаходити пости з ресурсу https://jsonplaceholder.typicode.com/posts та робити 
 // вибірку постів за id користувача. Також у всіх відфільтрованих постів повинна бути відсутня властивість title */
 
-// async function getPostsByUsedId(url, userId) {
+async function getPostsByUsedId(url, userId) {
 // // Ваш код
 
-// try {
-//     const getResponse = await fetch(url);
-//     const result = await getResponse.json();
-//     const filteredPosts = result
-//     .filter(post => post.userId === userId)
-//     .map(post => {
-//         const { title, ...rest } = post;
-//         delete rest.title; // Видалення властивості title
-//         return rest;
-//     });
-//     return filteredPosts;
+try {
+    const getResponse = await request.getRequest(url);
+    const filteredPosts = getResponse
 
-// } catch (error) {
-//     console.error('Error during GET request:', error);
-//     throw error;
-// }
+    .filter(post => post.userId === userId)
+    .map(post => {
+        const { title, ...rest } = post; // Видалення властивості title
+        return rest;
+    });
+    return filteredPosts;
 
-// }
+} catch (error) {
+    console.error('Error during GET request:', error);
+    throw error;
+}
 
-// const posts = await getPostsByUsedId(baseUrl, 5);
-// console.log(posts); // маємо тільки пости юзера з id = 5, у яких нема title
+}
+
+const posts = await getPostsByUsedId(baseUrl, 5);
+console.log(posts); // маємо тільки пости юзера з id = 5, у яких нема title
 
 // /* 3. Реалізувати функцію createNewPost, яка буде створювати новий пост на ресурсі https://jsonplaceholder.typicode.com/posts */
-// const body = {
-//   userId: 155,
-//   title: "New title",
-//   body: "New body",
-// };
-// async function createNewPost(url, body) {
+const body = {
+  userId: 155,
+  title: "New title",
+  body: "New body",
+};
+async function createNewPost(url, body) {
 //     // Ваш код
-//     try {
-//             const makePostRequest = await fetch(url,{
-//                 method: 'post',
-//                 body: JSON.stringify(body),
-//                 headers: {'Content-Type': 'application/json'} 
-//             });
-//             const result = await makePostRequest.json();
-//             return result;
+    try {
+            const makePostRequest = await request.postRequest(url,{
+                method: 'post',
+                body: JSON.stringify(body),
+                headers: {'Content-Type': 'application/json'} 
+            });
+            
+            return makePostRequest;
         
-//         } catch (error) {
-//             console.error('Error during POST request:', error);
-//             throw error;
-//         }
+        } catch (error) {
+            console.error('Error during POST request:', error);
+            throw error;
+        }
 
-// }
+}
 
-// const result = await createNewPost(baseUrl, body);
-// console.log(result); // повинен буди респонс у вигляді { userId: 155, title: 'New title', body: 'New body', id: 101 }
+const result = await createNewPost(baseUrl, body);
+console.log(result); // повинен буди респонс у вигляді { userId: 155, title: 'New title', body: 'New body', id: 101 }
 
 // /* 4. Використовуючи синтаксис промісів створити функцію, яка генерує рандомне число від 0 до 10 та з затримкою в 3 секунди
 // резолвить проміс з результатом "Resolved <число>" у випадку, якщо число більше 5ти, або повертає reject з 
